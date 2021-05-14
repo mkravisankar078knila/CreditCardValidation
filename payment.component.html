@@ -1,0 +1,118 @@
+<form  [formGroup]="cardDetails" (ngSubmit)="onSubmit()" class="mb-2" novalidate autocomplete="off">
+    <h3 class="text-center">Card Payment Details</h3>
+    <div class="row">
+    <div class="col-md-4">
+        <div class="form-group ">
+            <label>Card holder name</label>
+                <input name="name" formControlName="name" class="form-control form-control-mg">
+                <div>
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.name.errors?.required">required</small>
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.name.errors?.maxLength">Only Max 20 Char allowed</small>
+                </div>  
+                <br/>
+        </div>
+        <div class="form-group">
+            <label>Card Type :</label>
+            <small class="form-text text-primary">{{cardType}}</small>
+            <br/>
+        </div>
+        <div class="form-group ">
+            <label>Card number</label>
+            <input (keyup) = "setCardTypeValue($event)" class="form-control form-control-mg" id="creditCards" name="creditCards"
+            formControlName="creditCards" type="tel" ccNumber >
+            <div>
+            <small class="form-text text-danger"  
+            *ngIf="cardDetails.controls.creditCards.errors?.required">required</small>
+            <small class="form-text text-danger"  
+            *ngIf="cardDetails.controls.creditCards.errors?.creditCard">is not a card number</small>
+            </div>
+           
+            <br/>
+        </div>
+        <div class="form-group ">
+            <label>Expiration Date</label>
+            <input class="form-control form-control-mg" id="cc-exp-date" name="expirationDate" 
+            formControlName="expirationDate" type="tel" autocomplete="cc-exp" ccExp>
+            <!-- <small class="form-text text-danger"  
+            *ngIf="cardDetails.controls.expirationDate.errors?.ccExp">invalid date</small>
+             -->
+            <br/>
+        </div>
+        <div class="form-group ">
+            <label>Cvc</label>
+            <!-- <input class="form-control form-control-mg" id="cc-cvc" name="cvc" 
+            formControlName="cvc" type="tel" autocomplete="off" ccCvc> -->
+            <input class="form-control form-control-mg" id="cvc" name="cvc" 
+            formControlName="cvc" autocomplete="off">
+            <div>
+            <small class="form-text text-danger"  
+            *ngIf="cardDetails.controls.cvc.errors?.required">required</small>
+            <small class="form-text text-danger"  
+            *ngIf="cardDetails.controls.cvc.errors?.maxLength">Only Max 4 Char allowed</small>
+            <small class="form-text text-danger"  
+            *ngIf="cardDetails.controls.cvc.errors?.minLength">Only Min 3 Char allowed</small>
+            </div>
+            <br/>
+        </div>
+    </div>
+   
+    <div class="col-md-4">
+        <div class="form-group ">
+            <label>Address</label>
+                <input name="address" formControlName="address" class="form-control form-control-mg">
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.address.errors?.maxLength">Only allowed 20 char</small>
+                <br/>
+        </div>
+        <div class="form-group ">
+            <label>City</label>
+                <input name="city" formControlName="city" class="form-control form-control-mg">
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.city.errors?.maxLength">Only allowed 20 char</small>
+                <br/>
+        </div>  
+        <div class="form-group ">
+            <label>Country</label>
+                <input name="country" formControlName="country" class="form-control form-control-mg">
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.country.errors?.maxLength">Only allowed 20 char</small>
+            <br/>
+        </div>
+        <div class="form-group ">
+            <label>Phone Number</label>
+                <input name="phoneNumber" formControlName="phoneNumber" placeholder="10 digits number"    
+                class="form-control form-control-mg">
+                <div>
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.phoneNumber.errors?.required">required</small>
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.phoneNumber.errors?.mask">Phone.No invalid</small>
+                </div>
+            <br/>
+        </div> 
+        <div class="form-group ">
+            <label>Email</label>
+                <input name="email" formControlName="email" class="form-control form-control-mg">
+                <div>
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.email.errors?.required">required</small>
+                <small class="form-text text-danger"  
+                *ngIf="cardDetails.controls.email.errors?.email">Email invalid</small>
+                </div>
+            <br/> 
+        </div> 
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit" [disabled]="cardDetails.invalid">Submit</button>
+    </div>
+   
+    </div>
+</form>
+
+
+
+<!-- mask="(9999)-999-999" ngx-mask -->
+
